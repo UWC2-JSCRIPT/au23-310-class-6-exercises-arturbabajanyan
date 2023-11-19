@@ -5,6 +5,11 @@
  */
 
 //  Create an instance, accelerate twice, brake once, and console log the instance.toString()
+const gasCarAccelerate = 2;
+const gasCarBreak = 1;
+const electricCarAccelerate = 4;
+const electricCarBreak = 2;
+
 
 class Car {
     constructor(model) {
@@ -12,12 +17,12 @@ class Car {
         this.model = model;
     }
 
-    accelerate() {
-        this.currentSpeed += 1;
+    accelerate(speed) {
+        this.currentSpeed += speed;
     }
 
-    break() {
-        this.currentSpeed -= 1;
+    break(breakPedal) {
+        this.currentSpeed -= breakPedal;
     }
 
     toString() {
@@ -26,9 +31,9 @@ class Car {
 }
 
 const rav4 = new Car('Rav4');
-rav4.accelerate();
-rav4.accelerate();
-rav4.break();
+rav4.accelerate(gasCarAccelerate);
+rav4.accelerate(gasCarAccelerate);
+rav4.break(gasCarBreak);
 
 console.log(rav4.toString());
 
@@ -41,11 +46,14 @@ console.log(rav4.toString());
 
 //  Create an instance, accelerate twice, brake once, and console log the instance.toString()
 
-const electricCar = Object.create(Car);
+class ElectricCar extends Car {
 
-const rav4Prime = new electricCar('Rav4 Prime')
-rav4Prime.accelerate();
-rav4Prime.accelerate();
-rav4Prime.break();
+}
+
+const rav4Prime = new ElectricCar("Rav4 Prime");
+
+rav4Prime.accelerate(electricCarAccelerate);
+rav4Prime.accelerate(electricCarAccelerate);
+rav4Prime.break(electricCarBreak);
 
 console.log(rav4Prime.toString());
