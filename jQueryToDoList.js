@@ -1,19 +1,39 @@
-/**
- * Toggles "done" class on <li> element
- */
+$( document ).ready(function() {
+    // alert( "ready!" );
 
-/**
- * Delete element when delete link clicked
- */
+  let ulElement = $('.today-list');
 
-/**
- * Adds new list item to <ul>
- */
-const addListItem = function(e) {
-  e.preventDefault();
-  const text = $('input').val();
+  ulElement.on("click", "a", function(e) {
+    $(e.target).parent().fadeOut(720, function () {
+      $(e.target).closest('li').remove();
+    });
+  });
+  ulElement.on("click", "span", e => $(e.target).closest('li').toggleClass('done'));
 
-  // rest here...
-};
+  const addListItem = function(e) {
+    e.preventDefault();
+    const text = $('input').val();
 
-// add listener for add
+    if (text != '') {
+
+      const newLiEl = $('<li>');
+      const newAEl = $('<a>');
+      newAEl.addClass('delete');
+      newAEl.text('Delete');
+      
+      const newSpan = $('<span>');
+      newSpan.text(`${text}\n`)
+
+      newLiEl.append(newSpan, newAEl);
+
+      ulElement.append(newLiEl);
+
+      $('input').val('')
+
+    }
+  };
+
+  const addItem = $('.add-item');
+  addItem.on('click', addListItem)
+
+});
